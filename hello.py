@@ -1,13 +1,5 @@
-hello = 'Salom Dunyo';
-
-print(hello);
-
-xabar = 'Salom';
-print(xabar);
-xabar = 'Dunyo';
-print(xabar);
-
-radius =  5;
-pi = 3.14159;
-aylana_yuzi = pi*radius**2;
-print(aylana_yuzi)
+ism = 'Javohir';
+familya = 'Suvonov';
+ism_sharif = f"{ism} \t{familya}"
+# ism_sharif = f"{ism} \n{familya}"
+print(ism_sharif);
