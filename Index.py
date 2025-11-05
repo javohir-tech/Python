@@ -1,3 +1,14 @@
-name = input('ismingiz nima');
+people = 7_594_000_000
+print(f"yer kurrasida {people} ta odam bor")
 
-print(f"salom {name}") 
+ism ="Jobir"
+age = 21;
+print(type(ism))
+print(type(age))
+xabar = ism + ' ' + str(age) + ' ' + 'yoshda';
+print(xabar)
+
+t_yil = input("Yoshingizni kiriting")
+
+yosh = 2025-int(t_yil)
+print(f"siz {yosh} yoshda ekansiz")
