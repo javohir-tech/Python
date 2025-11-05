@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qo'l bilan Globus Boshqaruvi</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(ellipse at center, #1b2735 0%, #090a0f 100%);
+        }
+        
+        #globeCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #videoContainer {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 280px;
+            height: 210px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            border: 3px solid rgba(255,255,255,0.2);
+            z-index: 10;
+        }
+        
+        #inputVideo {
+            display: none;
+        }
+        
+        #outputCanvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+            max-width: 350px;
+        }
+        
+        .info-panel h2 {
+            margin: 0 0 15px 0;
+            font-size: 24px;
+            color: #4CAF50;
+        }
+        
+        .control-item {
+            margin: 12px 0;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border-left: 3px solid #4CAF50;
+        }
+        
+        .control-item .emoji {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .control-item .title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .control-item .description {
+            font-size: 13px;
+            color: #aaa;
+        }
+        
+        .status-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 8px 32px rgba(76, 175, 80, 0.4);
+        }
+        
+        .gesture-indicator {
+            position: absolute;
+            bottom: 250px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            z-index: 10;
+            text-align: center;
+            min-width: 280px;
+        }
+        
+        .gesture-indicator .current-gesture {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .gesture-indicator .gesture-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        
+        .zoom-indicator {
+            position: absolute;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 15px;
+            z-index: 10;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .zoom-bar {
+            width: 200px;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .zoom-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            transition: width 0.3s;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .searching {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="globeCanvas"></canvas>
+    
+    <div class="info-panel">
+        <h2>🌍 Globus Boshqaruvi</h2>
+        <div class="control-item">
+            <div class="title">
+                <span class="emoji">👆</span> 1 Barmoq
+            </div>
+            <div class="description">Globusni aylantiramiz</div>
+        </div>
+        <div class="control-item">
+            <div class="title">
+                <span class="emoji">✌️</span> 2 Barmoq
+            </div>
+            <div class="description">Yaqinlashtirish (zoom in)</div>
+        </div>
+        <div class="control-item">
+            <div class="title">
+                <span class="emoji">🖐️</span> 5 Barmoq
+            </div>
+            <div class="description">Uzoqlashtirish (zoom out)</div>
+        </div>
+        <div class="control-item">
+            <div class="title">
+                <span class="emoji">✊</span> Mushtum
+            </div>
+            <div class="description">To'xtatish / Pause</div>
+        </div>
+    </div>
+    
+    <div class="status-panel" id="statusPanel">
+        🌐 Globus tayyor
+    </div>
+    
+    <div class="gesture-indicator" id="gestureIndicator">
+        <div class="current-gesture">👋</div>
+        <div class="gesture-name">Qo'lingizni ko'rsating</div>
+    </div>
+    
+    <div class="zoom-indicator">
+        <span>🔍</span>
+        <div class="zoom-bar">
+            <div class="zoom-fill" id="zoomFill" style="width: 50%"></div>
+        </div>
+        <span id="zoomPercent">50%</span>
+    </div>
+    
+    <div id="videoContainer">
+        <video id="inputVideo" autoplay playsinline></video>
+        <canvas id="outputCanvas"></canvas>
+    </div>
+
+    <script>
+        // Three.js sozlash
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: document.getElementById('globeCanvas'),
+            antialias: true,
+            alpha: true
+        });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 0);
+        
+        // Yulduzlar qo'shish
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.7 });
+        
+        const starsVertices = [];
+        for (let i = 0; i < 10000; i++) {
+            const x = (Math.random() - 0.5) * 2000;
+            const y = (Math.random() - 0.5) * 2000;
+            const z = (Math.random() - 0.5) * 2000;
+            starsVertices.push(x, y, z);
+        }
+        
+        starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+        const stars = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(stars);
+        
+        // Yorug'lik
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(5, 3, 5);
+        scene.add(directionalLight);
+        
+        // Globus yaratish
+        const globeGeometry = new THREE.SphereGeometry(2, 64, 64);
+        
+        // Yer teksturasi (oddiy versiya - rangli shar)
+        const globeMaterial = new THREE.MeshPhongMaterial({
+            color: 0x2194ce,
+            emissive: 0x112244,
+            shininess: 25,
+            wireframe: false
+        });
+        
+        // Qit'alar qo'shish (oddiy nurlar bilan)
+        const globeGroup = new THREE.Group();
+        const globe = new THREE.Mesh(globeGeometry, globeMaterial);
+        globeGroup.add(globe);
+        
+        // Qit'alar (yashil dog'lar)
+        const continentGeometry = new THREE.SphereGeometry(2.01, 32, 32);
+        const continentMaterial = new THREE.MeshPhongMaterial({
+            color: 0x2d5016,
+            transparent: true,
+            opacity: 0.8
+        });
+        
+        const continents = new THREE.Mesh(continentGeometry, continentMaterial);
+        globeGroup.add(continents);
+        
+        // Grid qo'shish
+        const gridHelper = new THREE.PolarGridHelper(2, 16, 8, 64, 0x4CAF50, 0x4CAF50);
+        gridHelper.rotation.x = Math.PI / 2;
+        globeGroup.add(gridHelper);
+        
+        scene.add(globeGroup);
+        camera.position.z = 5;
+        
+        // Boshqaruv o'zgaruvchilari
+        let targetRotationX = 0;
+        let targetRotationY = 0;
+        let currentZoom = 5;
+        let targetZoom = 5;
+        let isRotating = true;
+        let handX = 0;
+        let handY = 0;
+        
+        // MediaPipe elementlari
+        const videoElement = document.getElementById('inputVideo');
+        const canvasElement = document.getElementById('outputCanvas');
+        const canvasCtx = canvasElement.getContext('2d');
+        const statusPanel = document.getElementById('statusPanel');
+        const gestureIndicator = document.getElementById('gestureIndicator');
+        const zoomFill = document.getElementById('zoomFill');
+        const zoomPercent = document.getElementById('zoomPercent');
+        
+        // Barmoqlarni sanash
+        function countFingers(landmarks) {
+            let count = 0;
+            
+            // Bosh barmoq
+            if (landmarks[4].x < landmarks[3].x) {
+                count++;
+            }
+            
+            // Qolgan barmoqlar
+            const fingerTips = [8, 12, 16, 20];
+            const fingerPips = [6, 10, 14, 18];
+            
+            for (let i = 0; i < 4; i++) {
+                if (landmarks[fingerTips[i]].y < landmarks[fingerPips[i]].y) {
+                    count++;
+                }
+            }
+            
+            return count;
+        }
+        
+        function updateGesture(fingers, landmarks) {
+            const gestureElem = gestureIndicator.querySelector('.current-gesture');
+            const nameElem = gestureIndicator.querySelector('.gesture-name');
+            
+            if (fingers === 0) {
+                gestureElem.textContent = '✊';
+                nameElem.textContent = 'TO\'XTATISH';
+                statusPanel.textContent = '⏸️ To\'xtatildi';
+                statusPanel.style.background = 'rgba(255, 152, 0, 0.9)';
+                isRotating = false;
+            } else if (fingers === 1) {
+                gestureElem.textContent = '☝️';
+                nameElem.textContent = 'AYLANTIRISH';
+                statusPanel.textContent = '🔄 Aylanmoqda';
+                statusPanel.style.background = 'rgba(33, 150, 243, 0.9)';
+                isRotating = true;
+                
+                // Qo'l pozitsiyasi bo'yicha aylantirish
+                const indexFinger = landmarks[8];
+                handX = (indexFinger.x - 0.5) * 2;
+                handY = (indexFinger.y - 0.5) * 2;
+                targetRotationY = handX * Math.PI * 2;
+                targetRotationX = -handY * Math.PI;
+            } else if (fingers === 2) {
+                gestureElem.textContent = '✌️';
+                nameElem.textContent = 'YAQINLASHTIRISH';
+                statusPanel.textContent = '🔍 Zoom In';
+                statusPanel.style.background = 'rgba(76, 175, 80, 0.9)';
+                isRotating = false;
+                targetZoom = Math.max(2, targetZoom - 0.05);
+            } else if (fingers === 5) {
+                gestureElem.textContent = '🖐️';
+                nameElem.textContent = 'UZOQLASHTIRISH';
+                statusPanel.textContent = '🔍 Zoom Out';
+                statusPanel.style.background = 'rgba(156, 39, 176, 0.9)';
+                isRotating = false;
+                targetZoom = Math.min(10, targetZoom + 0.05);
+            } else {
+                gestureElem.textContent = '🤟';
+                nameElem.textContent = fingers + ' BARMOQ';
+                statusPanel.textContent = '🌐 Globus tayyor';
+                statusPanel.style.background = 'rgba(76, 175, 80, 0.9)';
+                isRotating = false;
+            }
+            
+            // Zoom indikatorini yangilash
+            const zoomValue = ((10 - targetZoom) / 8) * 100;
+            zoomFill.style.width = zoomValue + '%';
+            zoomPercent.textContent = Math.round(zoomValue) + '%';
+        }
+        
+        function onResults(results) {
+            canvasElement.width = videoElement.videoWidth;
+            canvasElement.height = videoElement.videoHeight;
+            
+            canvasCtx.save();
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+            canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+            
+            if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+                const landmarks = results.multiHandLandmarks[0];
+                
+                // Qo'lni chizish
+                drawConnectors(canvasCtx, landmarks);
+                drawLandmarks(canvasCtx, landmarks);
+                
+                // Ishorani aniqlash
+                const fingers = countFingers(landmarks);
+                updateGesture(fingers, landmarks);
+            } else {
+                const gestureElem = gestureIndicator.querySelector('.current-gesture');
+                const nameElem = gestureIndicator.querySelector('.gesture-name');
+                gestureElem.textContent = '👋';
+                nameElem.textContent = 'Qo\'lingizni ko\'rsating';
+                
+                // Avtomatik aylantirish
+                if (!isRotating) {
+                    globeGroup.rotation.y += 0.003;
+                }
+            }
+            
+            canvasCtx.restore();
+        }
+        
+        function drawConnectors(ctx, landmarks) {
+            const connections = [
+                [0,1],[1,2],[2,3],[3,4],
+                [0,5],[5,6],[6,7],[7,8],
+                [0,9],[9,10],[10,11],[11,12],
+                [0,13],[13,14],[14,15],[15,16],
+                [0,17],[17,18],[18,19],[19,20],
+                [5,9],[9,13],[13,17]
+            ];
+            
+            ctx.strokeStyle = '#00FF00';
+            ctx.lineWidth = 2;
+            
+            connections.forEach(([start, end]) => {
+                ctx.beginPath();
+                ctx.moveTo(
+                    landmarks[start].x * ctx.canvas.width,
+                    landmarks[start].y * ctx.canvas.height
+                );
+                ctx.lineTo(
+                    landmarks[end].x * ctx.canvas.width,
+                    landmarks[end].y * ctx.canvas.height
+                );
+                ctx.stroke();
+            });
+        }
+        
+        function drawLandmarks(ctx, landmarks) {
+            landmarks.forEach((landmark, i) => {
+                ctx.beginPath();
+                ctx.arc(
+                    landmark.x * ctx.canvas.width,
+                    landmark.y * ctx.canvas.height,
+                    i === 0 ? 6 : 4,
+                    0,
+                    2 * Math.PI
+                );
+                ctx.fillStyle = i === 0 ? '#FF0000' : '#0000FF';
+                ctx.fill();
+            });
+        }
+        
+        // MediaPipe sozlash
+        const hands = new Hands({
+            locateFile: (file) => {
+                return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+            }
+        });
+        
+        hands.setOptions({
+            maxNumHands: 1,
+            modelComplexity: 1,
+            minDetectionConfidence: 0.5,
+            minTrackingConfidence: 0.5
+        });
+        
+        hands.onResults(onResults);
+        
+        // Kamera
+        const cameraMP = new Camera(videoElement, {
+            onFrame: async () => {
+                await hands.send({image: videoElement});
+            },
+            width: 640,
+            height: 480
+        });
+        
+        cameraMP.start();
+        
+        // Animatsiya
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Silliq aylantirish
+            if (isRotating) {
+                globeGroup.rotation.x += (targetRotationX - globeGroup.rotation.x) * 0.1;
+                globeGroup.rotation.y += (targetRotationY - globeGroup.rotation.y) * 0.1;
+            }
+            
+            // Silliq zoom
+            currentZoom += (targetZoom - currentZoom) * 0.1;
+            camera.position.z = currentZoom;
+            
+            // Yulduzlarni asta aylantirish
+            stars.rotation.y += 0.0002;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Ekran o'lchami o'zgarganda
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
