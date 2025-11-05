@@ -8,7 +8,7 @@ print(type(age))
 xabar = ism + ' ' + str(age) + ' ' + 'yoshda';
 print(xabar)
 
-t_yil = input("Yoshingizni kiriting")
+t_yil = int(input("Yoshingizni kiriting"))
 
-yosh = 2025-int(t_yil)
-print(f"siz {yosh} yoshda ekansiz")
+yosh = 2025-t_yil
+print("Siz" + " " + str(yosh) + " " + "yosh ekansiz")
