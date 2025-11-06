@@ -1,32 +1,41 @@
-countries = ["Uzbekistan" , "Aqsh" , "Russian" , "China" , "korea"]
-print(countries)
-print(len(countries))
-tartiblangan  = sorted(countries , reverse=True);
-# sorted masssivni tartiblaydi lekin asil massivga ozgartirmaydi
-# reverse=True argumenti masssivni teskari tartiblangan holatda qiladi
-print(tartiblangan)
-print(countries)
-juftSonlar = list(range(120 , 1201 , 2));
-summa = sum(juftSonlar)
-# print(juftSonlar)
-different = max(juftSonlar)-min(juftSonlar)
-print('farqi: ', different)
-print('summa : ', summa)
-print(len(juftSonlar))
-print(juftSonlar[:20])
-print(juftSonlar[90:110])
-print(juftSonlar[521:])
+# Loops
+mehmonlar = ['Ali','Vali','Hasan', 'Husan','Olim']
+for mehmon in mehmonlar : 
+    print(f"hurmatli {mehmon} , sizni 20 dekaabr kuni nahorki oshga taaklif qilamiz")
+    print("Hurmat bilan Yusupovlar oilasi\n")
+    
+sonlar = list(range(1,11))
+sonlar_kvadrati  = []
+for son in sonlar :
+    sonlar_kvadrati.append(son**2);
+print(sonlar_kvadrati)
 
-taomlar = ['osh' , 'manti' , 'tuxum' , 'beshbarmoq', 'mastava'];
+# dostlar = [];
+# print("Dostlarni kiriting")
+# for n in range(5) : 
+#     dost = input(f"{n+1} dostni kiriting")
+#     dostlar.append(dost)
+# print(dostlar)
 
-nonushta = taomlar[:];
-nonushta.append('moshxorda');
-nonushta.append('grechka')
-#tuple ozgartirip bolmaydigan massiv 
-nonushta =tuple(nonushta);
-# list() bilan uni oddiy royhatga aylantirip o'zgartirish kiritamiz
-nonushta =  list(nonushta)
-nonushta[0] = "qaymoq va non"
-nonushta = tuple(nonushta)
-print(taomlar)
-print(nonushta)
+names = ['javohir', 'bek', 'yahyo', 'jaahon', 'mansur']
+
+for name in names : 
+    print(f"salom {name}")
+    
+newNums = list(range(10, 101));
+for num in newNums :
+    print(num**3)
+    
+kinolar = []
+print('sevimli kinolar')
+for movie in range(5):
+     newMovie = input(f"{movie+1} kino nomini kiriting")
+     kinolar.append(newMovie.strip())
+print(kinolar)
+
+metting = []
+print('bugun kimlar bilan uchrashdiz')
+for peopl in range(5):
+    meet = input(f"{peopl+1}  odamni kiriting")
+    metting.append(meet)
+print(metting)
