@@ -1,32 +1,32 @@
-names  = ["Javohir" , "Suvonov" , "Ulug'bek"];
+countries = ["Uzbekistan" , "Aqsh" , "Russian" , "China" , "korea"]
+print(countries)
+print(len(countries))
+tartiblangan  = sorted(countries , reverse=True);
+# sorted masssivni tartiblaydi lekin asil massivga ozgartirmaydi
+# reverse=True argumenti masssivni teskari tartiblangan holatda qiladi
+print(tartiblangan)
+print(countries)
+juftSonlar = list(range(120 , 1201 , 2));
+summa = sum(juftSonlar)
+# print(juftSonlar)
+different = max(juftSonlar)-min(juftSonlar)
+print('farqi: ', different)
+print('summa : ', summa)
+print(len(juftSonlar))
+print(juftSonlar[:20])
+print(juftSonlar[90:110])
+print(juftSonlar[521:])
 
-print(f"Salom {names[0]} , bugun choyxona bormi . \n{names[1]} Salom bugun choyxona bormi")
+taomlar = ['osh' , 'manti' , 'tuxum' , 'beshbarmoq', 'mastava'];
 
-sonlar = [1, 2, -3 , 2.1];
-[sonlar[0], sonlar[1]] = [sonlar[1], sonlar[0]]
-
-print(sonlar);
-
-t_shaxslar =['Alisher' , 'Temur']
-z_shaxslar = ["Bill", "Ilon"]
-
-a = t_shaxslar.pop(-1);
-b = z_shaxslar.pop(0);
-
-print(a + "salom"  +" " + b + "salom");
-
-friends = [];
-
-friends.append("Javohir")
-friends.append("Jalol")
-friends.append("BEk")
-print(friends)
-del friends[1]
-friends.remove("Javohir")
-friends.insert(1, "Javohir")
-friends.insert(1 , "jalol")
-mehmonlar = []
-bek = friends.pop(0)
-mehmonlar.append(bek)
-print(friends)
-print(mehmonlar)
+nonushta = taomlar[:];
+nonushta.append('moshxorda');
+nonushta.append('grechka')
+#tuple ozgartirip bolmaydigan massiv 
+nonushta =tuple(nonushta);
+# list() bilan uni oddiy royhatga aylantirip o'zgartirish kiritamiz
+nonushta =  list(nonushta)
+nonushta[0] = "qaymoq va non"
+nonushta = tuple(nonushta)
+print(taomlar)
+print(nonushta)
