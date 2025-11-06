@@ -1,14 +1,32 @@
-people = 7_594_000_000
-print(f"yer kurrasida {people} ta odam bor")
+names  = ["Javohir" , "Suvonov" , "Ulug'bek"];
 
-ism ="Jobir"
-age = 21;
-print(type(ism))
-print(type(age))
-xabar = ism + ' ' + str(age) + ' ' + 'yoshda';
-print(xabar)
+print(f"Salom {names[0]} , bugun choyxona bormi . \n{names[1]} Salom bugun choyxona bormi")
 
-t_yil = int(input("Yoshingizni kiriting"))
+sonlar = [1, 2, -3 , 2.1];
+[sonlar[0], sonlar[1]] = [sonlar[1], sonlar[0]]
 
-yosh = 2025-t_yil
-print("Siz" + " " + str(yosh) + " " + "yosh ekansiz")
+print(sonlar);
+
+t_shaxslar =['Alisher' , 'Temur']
+z_shaxslar = ["Bill", "Ilon"]
+
+a = t_shaxslar.pop(-1);
+b = z_shaxslar.pop(0);
+
+print(a + "salom"  +" " + b + "salom");
+
+friends = [];
+
+friends.append("Javohir")
+friends.append("Jalol")
+friends.append("BEk")
+print(friends)
+del friends[1]
+friends.remove("Javohir")
+friends.insert(1, "Javohir")
+friends.insert(1 , "jalol")
+mehmonlar = []
+bek = friends.pop(0)
+mehmonlar.append(bek)
+print(friends)
+print(mehmonlar)
