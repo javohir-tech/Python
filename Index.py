@@ -1,32 +1,35 @@
-avtolar = ['audi','bmw','volvo','kia','hyundai']
+import math
+# cars = ['toyota', 'mazda', 'hyundai', 'gm', 'kia'] 
 
-for avto in avtolar : 
-    if avto == 'bmw': 
-        print(avto.upper())
-    else  :
-       print(avto.title())
+# for car in cars : 
+#     if car.lower() !=  'gm' : 
+#         # car.upper() 
+#         print(car.title())
+#     else : 
+#         # car.title()
+#         print(car.upper())
         
-print(avtolar)
-
-# ism = input('Ismingizni kiriting \n>>>')
-
-# if ism.lower()!='ali':
-#     print(f"uzr {ism} biz Alini kutayapmiz")
-# else: 
-#     print('salom Ali')
-
-javob = int(input('6*12 nechi boladi'))
-
-if javob != 72:
-    print('Xato Javob');
-else:
-    print('Togri');
+# login = input('Loginni kiriting ');
+# if login.lower() == 'admin' :
+#     print('Xush kelibsiz, Admin. Foydalanuvchilar ro\'yxatini ko\'rasizmi?')
+# else:
+#     print(f"hush kelipsiz {login}")
     
-yosh = int(input('Yoshingizni kiriting>>>'))
+# a= int(input('a sonni kiriting '))
+# b= int(input('b sonni kiriting '))
+# if a==b : 
+#     print('sonlar teng');
 
-if yosh >= 18 : 
-    print('hush kelipsiz')
-else:
-    print('yosh chagarasiga mos emas')
-    
+# javob = int(input('sonni kiriting'));
+# if javob <0:
+#     print('son manfiy');
+# else:
+#     print('son musbat')
+
+javob = int(input('Sonni kiritng '));
+
+if javob >=0 :
+    print(int(math.sqrt(javob)))
+else: 
+    print('Musbat son kiriting ')
     
