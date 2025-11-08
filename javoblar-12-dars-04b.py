@@ -12,13 +12,13 @@ mahsulotlar = ['un', "yog'", "sovun", 'tuxum', 'piyoz',
 
 savat = []
 for n in range(5):
-    savat.append(input(f'Savatga {n+1}-mahsulotni qo'shing: '))
+    savat.append(input(f"Savatga {n+1}-mahsulotni qo'shing: "))
 
 bor_mahsulotlar = []
 mavjud_emas = []
 for mahsulot in savat:
     if mahsulot in mahsulotlar:
-        bor_mahsulotlar.append(mahslot)
+        bor_mahsulotlar.append(mahsulot)
     else:
         mavjud_emas.append(mahsulot)
 
