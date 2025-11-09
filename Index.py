@@ -1,23 +1,25 @@
-davlatlar = {
-    "o'zbekiston":{'poytaxt':"toshkent",
-                   'maydon':448978,
-                   'aholi':33_000_000,
-                   'pul birligi':"so'm"
-                   },
-    "rossiya":{'poytaxt':"moskva",
-                   'maydon':17_098_246,
-                   'aholi':144_000_000,
-                   'pul birligi':"rubl"
-                   },
-    "aqsh":{'poytaxt':"vashington",
-                   'maydon':9_631_418,
-                   'aholi':327_000_000,
-                   'pul birligi':"dollar"},
-    "malayziya":{'poytaxt':"kuala-lumpur",
-                   'maydon':329750,
-                   'aholi':25_000_000,
-                   'pul birligi':"rinngit"}
-    }
+# print("Kiritilgan sonning kvadratini qaytaruvchi dastur");
 
-for davlat , malumot in davlatlar.items() :
-    print(f"{davlat} poytaxti {malumot["poytaxt"]}\n Hududi : {malumot['maydon']} kv.km \n Aholisi : {malumot["aholi"]} \n Pul birligi : {malumot['pul birligi']}")
+# savol = "Istalgan son kiriting";
+# savol+= "(dasturni to'xtatish uchun 'exit' deb yozing) : ";
+# flag = True
+# while flag:
+#          qiymat = input(savol)
+#          if qiymat == 'exit':
+#              break
+#          else:
+#              print(float(qiymat)**2)
+
+# for n in range(1, 11) :
+#     if n == 5 :
+#         continue
+#     print(n**2)
+    
+son = 0;
+
+while son < 10 : 
+    son+=1
+    if son == 3 :
+        continue
+    else: 
+        print(son**2)
