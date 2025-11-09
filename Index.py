@@ -10,17 +10,27 @@
 #     else: 
 #         buyurtmalar.append(buyurtma)
 
-mahsulotlar = {}
-qiymat = ''
-stop = "to'xtatish uchun 'stop' deb yozing"
-while qiymat != 'stop' : 
-    if qiymat != 'stop' : 
-        mahsulot = input(f"mahsulot nomini kiritin {stop} >>> ")
-        narxi = input(f"mahsulot narxini kiriting {stop} >>>")
-        if mahsulot.lower() == 'stop' or narxi.lower()== "stop" :
-            qiymat = 'stop'
-            for item, price in mahsulotlar.items():
-                print(f"{item} : {price}")
-        else:
-            mahsulotlar[mahsulot] = narxi
+mahsulotlar = {
+    "non" : 3000,
+    "gosht" : 75000, 
+    "sabzi" :  10000, 
+    "bodiring" : 17000, 
+    "pamidor" : 20000
+}
+
+buyurtmalar = [];
+flag =  True,
+sum= 0
+while flag :
+    buyurtma = input(f"mahsulot nomini kiriting . to'xtatish uchun 'stop' deb yozing>>>");
+    if buyurtma != 'stop' :
+        buyurtmalar.append(buyurtma)
+    else:
+        for order in buyurtmalar :
+            if order in mahsulotlar.keys() :
+                print(f"{order} narxi : {mahsulotlar[order]}") 
+                sum += mahsulotlar[order]
+            else:
+                print(f"{order} bizda mavjud emas")
+        print(f"jammi summa {sum} so'm")  
 
