@@ -1,25 +1,9 @@
-adiblar = [
-    {
-        "name": "Alisher Navoiy",
-        "tyil": 1441,
-        "soxasi": "Adabiyot"
-    },
-    {
-        "name": "Amir Temur",
-        "tyil": 1336,
-        "soxasi": "Shox"
-    },
-    {
-        "name": "Zahiriddin Muhammad Bobur",
-        "tyil": 1483,
-        "soxasi": "Shoir va sarkarda"
-    },
-    {
-        "name": "Abdulla Qodiriy",
-        "tyil": 1894,
-        "soxasi": "Yozuvchi"
-    }
-]
+friends = {
+    "ali" : ['Taxtlar oyini' , "nimadir"],
+    "javohir" : ["breking bad " , "baxt"]
+}
 
-for adib in adiblar :
-    print(f"{adib["name"]} {adib["tyil"]} yilda tug'ulgan ")
+for key , qiymat in friends.items() : 
+    print(f"{key} ning sevimli filmi quyidagilar " , end="")
+    for kino in qiymat : 
+        print(kino, end="")
