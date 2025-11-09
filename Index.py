@@ -1,13 +1,11 @@
-savol ="Kiritilgan sonning ildizini qaytaruvchi dastur.\n"
-savol += "Musbat son kiriting "
-savol += "(dasturni to'xtatish uchun 'exit' deb yozing): "
-
-while True:
-    qiymat = input(savol)
-    if qiymat=='Exit':
-        break
-    elif int(qiymat) < 0:
-        continue
-    else:
-        ildiz = float(qiymat)**(0.5)
-        print(f"{qiymat} ning ildizi {ildiz} ga teng")
+buyurtmalar = []
+flag = True
+while flag :
+    buyurtma  = input("buyutma qiling . Buyurtmani to'xtatish uchun 'exit' deb yozing>>>");
+    if buyurtma.lower() == 'exit' :
+        flag = False
+        print('Buyurtmalar')
+        for buyurtma in buyurtmalar :
+            print(buyurtma)
+    else: 
+        buyurtmalar.append(buyurtma)
