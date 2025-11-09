@@ -1,12 +1,13 @@
-print("Sevimli kinoblarizni kiriting");
+savol ="Kiritilgan sonning ildizini qaytaruvchi dastur.\n"
+savol += "Musbat son kiriting "
+savol += "(dasturni to'xtatish uchun 'exit' deb yozing): "
 
-savol = "(Dasturni to'xtatish uchun 'stop' deb yozing) ";
-flag = True
-n=1
-while flag :
-    qiymat = input(f"{n} chi sevimli kitob . {savol}")
-    if qiymat == 'stop':
-        flag = False
-        print('dastur tugadi>>>')
-    else: 
-        print(qiymat)
+while True:
+    qiymat = input(savol)
+    if qiymat=='Exit':
+        break
+    elif int(qiymat) < 0:
+        continue
+    else:
+        ildiz = float(qiymat)**(0.5)
+        print(f"{qiymat} ning ildizi {ildiz} ga teng")
