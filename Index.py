@@ -11,19 +11,16 @@
 #         buyurtmalar.append(buyurtma)
 
 mahsulotlar = {}
-flag = True;
+qiymat = ''
 stop = "to'xtatish uchun 'stop' deb yozing"
-while flag : 
-    mahsulot = input(f"mahsulotni kiriting {stop}>>> ")
-    if mahsulot.lower() == 'stop' :
-        for item, narx in mahsulotlar.items():
-            print(f"{item} : {narx}")
-            break
-    price = input(f"mahsulot narxini kiriting {stop}>>> ")
-    if mahsulot.lower() == 'stop' :
-        flag = False;
-        for item, narx in mahsulotlar.items():
-            print(f"{item} : {narx}")
-    
-    mahsulotlar[mahsulot] = int(price);
+while qiymat != 'stop' : 
+    if qiymat != 'stop' : 
+        mahsulot = input(f"mahsulot nomini kiritin {stop} >>> ")
+        narxi = input(f"mahsulot narxini kiriting {stop} >>>")
+        if mahsulot.lower() == 'stop' or narxi.lower()== "stop" :
+            qiymat = 'stop'
+            for item, price in mahsulotlar.items():
+                print(f"{item} : {price}")
+        else:
+            mahsulotlar[mahsulot] = narxi
 
