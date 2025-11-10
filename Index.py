@@ -1,24 +1,19 @@
-# import math
-# from math import pi
-# print(math.sqrt(625))
-# print(math.pow(23, 2))
-# print(pi)
-# print(math.log2(8))
-# print(math.log10(100))
-# print(math.ceil(2.1))
-# print(math.exp(2))
+import random 
 
-import random as r
+sonlar = random.sample(range(100) , 10)
 
-# son = r.randint(1, 100)
-# print(son)
+def daraja2(x):
+    return x**2
 
-# ismlar = ['olim','anvar','hasan','husan']
-# ism = r.choice(ismlar)
-# print(ism)
-# print(r.choice(ism))
+def juftmi(x):
+    return x%2==0
 
-x = list(range(0, 51, 5))
-print(x)
-r.shuffle(x)
-print(x)
+kvadratlar = list(map(lambda x : x**2 , sonlar))
+juftSonlar = list(filter(lambda x: x%2==0 , sonlar))
+# print(kvadratlar)
+# print(juftSonlar)
+
+mevalar = ['olma','anor','anjir','shaftoli',"o'rik","tarvuz","qovun","banan"]
+
+mevalar_b = list(filter(lambda meva : len(meva)<=5, mevalar))
+print(mevalar_b)
