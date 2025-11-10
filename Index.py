@@ -64,10 +64,10 @@ def tubSonlarTopish(chegara) :
                 break 
         if qoshiladigan != 0:
             tubSonlar.append(qoshiladigan)
-        if len(tubSonlar) == chegara :
+        if len(tubSonlar) == chegara+1 :
             break
         i+=1                
     return tubSonlar 
         
-print(tubSonlarTopish(501))
+print(tubSonlarTopish(500))
         
