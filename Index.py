@@ -37,5 +37,37 @@
 # res = maximum(1, 2, 3);
 # print(res)
 
+# def cercle(radius) :
+#     PI = 3.14;
+#     return {
+#         "radiusi" : radius, 
+#         "diametr" : 2*radius, 
+#         "perimetr": 2*PI*radius, 
+#         "yuzi" : PI*radius**2 
+#     }
 
+# javob = int(input("aylana radiusini kiriting : >>>"))
+# res = cercle(javob)
+# print(res)
 
+def tubSonlarTopish(chegara) : 
+    tubSonlar = [];
+    i=2;
+    while True:
+        neto = 0;
+        qoshiladigan = i
+        for n in range(1 , i) :
+            if i % n == 0 :
+                neto+=1
+            if neto >=2:
+                qoshiladigan = 0
+                break 
+        if qoshiladigan != 0:
+            tubSonlar.append(qoshiladigan)
+        if len(tubSonlar) == chegara :
+            break
+        i+=1                
+    return tubSonlar 
+        
+print(tubSonlarTopish(501))
+        
