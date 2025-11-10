@@ -2,10 +2,10 @@ def avto_info(kompaniya, model, rangi, korobka, yili, narhi=None):
     avto = {
         "kompaniya": kompaniya,
         "model": model,
-        "rangi": rangi,
-        "karobka": korobka,
-        "yili": yili,
-        "narxi": narhi,
+        "rang": rangi,
+        "korobka": korobka,
+        "yil": yili,
+        "narh": narhi,
     }
 
     return avto
