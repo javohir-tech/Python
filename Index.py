@@ -50,24 +50,34 @@
 # res = cercle(javob)
 # print(res)
 
-def tubSonlarTopish(chegara) : 
-    tubSonlar = [];
-    i=2;
-    while True:
-        neto = 0;
-        qoshiladigan = i
-        for n in range(1 , i) :
-            if i % n == 0 :
-                neto+=1
-            if neto >=2:
-                qoshiladigan = 0
-                break 
-        if qoshiladigan != 0:
-            tubSonlar.append(qoshiladigan)
-        if len(tubSonlar) == chegara+1 :
-            break
-        i+=1                
-    return tubSonlar 
+# def tubSonlarTopish(chegara) : 
+#     tubSonlar = [];
+#     i=2;
+#     while True:
+#         neto = 0;
+#         qoshiladigan = i
+#         for n in range(1 , i) :
+#             if i % n == 0 :
+#                 neto+=1
+#             if neto >=2:
+#                 qoshiladigan = 0
+#                 break 
+#         if qoshiladigan != 0:
+#             tubSonlar.append(qoshiladigan)
+#         if len(tubSonlar) == chegara+1 :
+#             break
+#         i+=1                
+#     return tubSonlar 
         
-print(tubSonlarTopish(500))
-        
+# print(tubSonlarTopish(500))
+
+def fibonachi(n):
+    fibonachiSonlari = [1 , 1];
+    i = 2
+    while len(fibonachiSonlari) < n : 
+        item = fibonachiSonlari[i-1]+fibonachiSonlari[i-2]
+        fibonachiSonlari.append(item)
+        i+=1
+    return fibonachiSonlari
+
+print(fibonachi(10))
