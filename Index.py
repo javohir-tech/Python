@@ -1,36 +1,18 @@
-# buyurtmalar = []
-# flag = True
-# while flag :
-#     buyurtma  = input("buyutma qiling . Buyurtmani to'xtatish uchun 'exit' deb yozing>>>");
-#     if buyurtma.lower() == 'exit' :
-#         flag = False
-#         print('Buyurtmalar')
-#         for buyurtma in buyurtmalar :
-#             print(buyurtma)
-#     else: 
-#         buyurtmalar.append(buyurtma)
+# def yoshHisobla(ism , t_yil):
+#     """Yosh hisoblaydigan funksiya """
+#     print(f"{ism.title()} ning yoshi {2025-t_yil}");
+    
+# name = input("Ismingiz>>>");
+# year = int(input("Tug'ilgan yilingiz >>>"))
 
-mahsulotlar = {
-    "non" : 3000,
-    "gosht" : 75000, 
-    "sabzi" :  10000, 
-    "bodiring" : 17000, 
-    "pamidor" : 20000
-}
+# yoshHisobla(name , year);
 
-buyurtmalar = [];
-flag =  True,
-sum= 0
-while flag :
-    buyurtma = input(f"mahsulot nomini kiriting . to'xtatish uchun 'stop' deb yozing>>>");
-    if buyurtma != 'stop' :
-        buyurtmalar.append(buyurtma)
-    else:
-        for order in buyurtmalar :
-            if order in mahsulotlar.keys() :
-                print(f"{order} narxi : {mahsulotlar[order]}") 
-                sum += mahsulotlar[order]
-            else:
-                print(f"{order} bizda mavjud emas")
-        print(f"jammi summa {sum} so'm")  
+def kub(param1):
+    for n in range(2, 11):
+        if param1 % n==0 :
+            print(f"{param1} {n} ga qoldiqsiz bo'linadi")
+    
+son = float(input("Sonni kiriting..."))
+# son2 = float(input(" 2 chi Sonni kiriting..."))
 
+kub(son)
