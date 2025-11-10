@@ -1,18 +1,23 @@
-# def yoshHisobla(ism , t_yil):
-#     """Yosh hisoblaydigan funksiya """
-#     print(f"{ism.title()} ning yoshi {2025-t_yil}");
-    
-# name = input("Ismingiz>>>");
-# year = int(input("Tug'ilgan yilingiz >>>"))
+users = []
+def userAdd(name , surname , year , address , email=None , tel=None):
+    user = {
+        "name" : name,
+        "surname" : surname, 
+        "birthday" : year, 
+        "age" : 2025-year, 
+        "address" : address, 
+        "email address" : email, 
+        "telNumber" : tel
+    }
+    users.append(user)
+    return user
 
-# yoshHisobla(name , year);
+name = input("Ismingiz : ")
+surname = input("Familya : ")
+t_yil = int(input("Tigulgan yilindiz : "))
+mazil = input("tugulgan joyigiz : ")
+emailManzil =  input("email manzilingiz : ")
+telNumber = input("Telefon raqam : ")
 
-def kub(param1):
-    for n in range(2, 11):
-        if param1 % n==0 :
-            print(f"{param1} {n} ga qoldiqsiz bo'linadi")
-    
-son = float(input("Sonni kiriting..."))
-# son2 = float(input(" 2 chi Sonni kiriting..."))
-
-kub(son)
+res =userAdd(name , surname , t_yil, mazil , emailManzil , telNumber);
+print(res)
