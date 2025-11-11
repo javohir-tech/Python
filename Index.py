@@ -5,8 +5,6 @@ import telebot
 
 load_dotenv()
 
-
-
 TOKEN = os.getenv("BOT_TOKEN")
 
 bot = telebot.TeleBot(TOKEN, parse_mode=None)
