@@ -1,6 +1,5 @@
 import random
 
-
 def son_top(son):
     print(f"1 dan {son} gacha son o'yladim topa olasizmi ?? ")
     num = random.choice(list(range(1, son + 1)))
