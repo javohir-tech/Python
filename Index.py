@@ -38,7 +38,10 @@ class Fan :
     
     def get_students(self) :
         return [talaba.get_fullname() for talaba in self.talabalar ]
-    
+
+def see_klass_methods(klass) :
+    return [method for method in dir(klass) if method.startswith("__") is False ]
+  
 talaba1 = Talaba("Javohir", "Suvonov" , 2004)
 talaba2 = Talaba("Yahyo", "Ergashev" , 2005)
 
@@ -47,5 +50,6 @@ matem.add_student(talaba1)
 matem.add_student(talaba2)
 print(matem.get_students())
 
+print(see_klass_methods(Talaba))
 # print(talaba1.name)
 # print(talaba1.get_name())
