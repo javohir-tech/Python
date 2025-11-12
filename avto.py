@@ -1,7 +1,7 @@
 from uuid import uuid4
 
-
 class Avto:
+    __num_avto = 0 
     def __init__(self, make, model, rang, yil, narx, km=0):
         self.make = make
         self.model = model
@@ -10,6 +10,11 @@ class Avto:
         self.narx = narx
         self.__km = km
         self.__id = uuid4()
+        Avto.__num_avto +=1
+
+    @classmethod
+    def get_avto_num(cls) :
+        return cls.__num_avto
 
     def get_km(self):
         return self.__km
@@ -23,7 +28,3 @@ class Avto:
         else:
             print("Mashinani km ni kamaytirip bo'lmaydi!!!")
 
-avto1 = Avto("GM" , "Gentra" , "qora" ,  2020, 12000 , 1000)
-# print(avto1.get_id())
-# avto1.add_km(3000)
-print(avto1.get_km())
