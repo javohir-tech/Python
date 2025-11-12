@@ -66,17 +66,41 @@ class Salon:
 
     def __repr__(self):
         return f"{self.name} saloni"
+    
+    def __call__(self, *args, **kwds):
+        if args :
+            for arg in args :
+                self.add_cars(arg)
+            return [car for car in self.cars]
+        else:
+            return [car for car in self.cars]
 
     def __len__(self):
         return len(self.cars)
-
+    
+    def __add__(self , y):
+        if isinstance(y, Salon):
+            salon3 = Salon(f"{self.name} {y.name}")
+            salon3.cars = self.cars + y.cars
+            return salon3
+        elif isinstance(y, Car):
+            self.add_cars(y)
 
 salon1 = Salon("Javohir Interprses")
-
+salon2 = Salon("Avto Max")
 car1 = Car("GM", "Nexia", 2015, "Mokri", 5000, 450000)
 car2 = Car("GM", "Laceti", 2018, "Oq", 7000, 250000)
+car3 = Car("GM", "Malibu", 2021, "Qora", 17000, 140000)
+car4 = Car("GM", "Cobalt", 2022, "Oq", 7500, 190000)
 
 salon1.add_cars(car1, car2)
+salon2(car3, car4)
+# print(salon1)
+# print(salon2)
+salon3 = salon1+salon2;
+print(salon3)
+print(salon3())
+
 
 # print(car1)
 # print(repr(car1))
@@ -85,5 +109,5 @@ salon1.add_cars(car1, car2)
 
 # print(len(salon1))
 # print(salon1[0])
-salon1[0] = Car("GM", "Malibu", 2021, "Qora", 17000, 140000)
-print(salon1[0])
+# salon1[0] = Car("GM", "Malibu", 2021, "Qora", 17000, 140000)
+# print(salon1[0])
