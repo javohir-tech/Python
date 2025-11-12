@@ -1,8 +1,8 @@
-class Car :
-    def __init__(self , make , model , year , color , price , km =0):
-        self.make =  make
-        self.model = model;
-        self.year = year ;
+class Car:
+    def __init__(self, make, model, year, color, price, km=0):
+        self.make = make
+        self.model = model
+        self.year = year
         self.color = color
         self.price = price
         self.__km = km
@@ -12,21 +12,55 @@ class Car :
 
     def __repr__(self):
         return f"{self.model} narxi : {self.price}"
-    
+
     def __eq__(x, y):
         return x.price == y.price
-    
-    def __lt__(x,y):
+
+    def __lt__(x, y):
         return x.price < y.price
-    
-    def __le__(x,y):
+
+    def __le__(x, y):
         return x.price <= y.price
-        
-car1 = Car("GM" , "Nexia" ,2015 , "Mokri" , 5000, 450000)
-car2 = Car("GM" , "Laceti" ,2018 , "Mokri" , 7000, 250000)
+
+
+class Salon:
+    def __init__(self, name):
+        self.name = name
+        self.cars = []
+
+    def add_cars(self, *qiymat):
+        for car in qiymat:
+            if isinstance(car, Car):
+                self.cars.append(car)
+            else:
+                print("Bu Avto Clasi bilan yaratilmagan !!!")
+      
+    def __getitem__(self, index):
+        return self.cars[index]
+    
+    def __setitem__(self , index , newValue):
+         if isinstance(newValue , Car) :
+             self.cars[index] = newValue
+                
+    def __repr__(self):
+        return f"{self.name} saloni"
+
+    def __len__(self):
+        return len(self.cars)
+
+salon1 = Salon("Javohir Interprses")
+
+car1 = Car("GM", "Nexia", 2015, "Mokri", 5000, 450000)
+car2 = Car("GM", "Laceti", 2018, "Oq", 7000, 250000)
+
+salon1.add_cars(car1 , car2)
+
 # print(car1)
 # print(repr(car1))
 # print(car1 == car2)
-print(car1 <= car2)
+# print(car1 <= car2)
 
-        
+# print(len(salon1)) 
+# print(salon1[0])
+salon1[0] = Car("GM" , "Malibu" , 2021 , "Qora" , 17000 , 140000)
+print(salon1[0])
