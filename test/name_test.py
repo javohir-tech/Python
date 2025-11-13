@@ -10,7 +10,7 @@ class NameTest(unittest.TestCase):
         res = get_fullname("javohir" , 'suvonov' , 'alimardon')
         self.assertEqual(res , "Javohir Alimardon Suvonov")
         
-
-unittest.main()
+if __name__ == "__main__" :
+    unittest.main()
 
 
