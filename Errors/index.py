@@ -46,6 +46,8 @@
 #     print(f" foydalanuvchini {key} malumoti kiritilmagan");
 # import json
 
+#^^^^^^^^^^^^^^^^^ FileNotFoundError ^^^^^^^^^^^^^^^^^^^^^^6
+
 # files = ['talaba1.json' , 'talaba3.json', 'talaba2.json']
 
 # for file in files :
@@ -56,13 +58,22 @@
 #         pass
 #     else:
 #         print(res['name'])
-        
-n = input('Son kiriitng')
+     
+#^^^^^^^^^^^^^^^^^^^^^^^^Ikkita uchta Expect^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^   
+# n = input('Son kiriitng>>>')
 
-try :
-    print(20/int(n))
-except ValueError :
-    print("Butun son kiriting >>>")
-except ZeroDivisionError:
-    print(') ga bolish mumkin emas ')
+# try :
+#     print(20/int(n))
+# except ValueError :
+#     print("Butun son kiriting !!!")
+# except ZeroDivisionError:
+#     print('0 ga bolish mumkin emas !!!')
+
+#^^^^^^^^^^^^^^^^^^^^^ While Bilan ^^^^^^^^^^^^^^^^
+
+# while True :
+#     age = input("Yosh kiriting >>>")
+#     if age.isdigit() :
+#         print(f"siz {2025-int(age)} yilda tug'ilgansiz !!!")
+#         break
     
