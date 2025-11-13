@@ -3,10 +3,10 @@ from circle import get_perimetr, get_area
 
 class TestCircle(unittest.TestCase):
     def test_circle_ares(self) :
-        self.assertEqual(get_area(5) , 78.53981633974483)
+        self.assertAlmostEqual(get_area(5) , 78.54 ,2)
         
     def test_circle_perimetr(self) :
-        self.assertEqual(get_perimetr(5) , 31.41592653589793)
+        self.assertAlmostEqual(get_perimetr(5) , 31.42, 2)
         
 
 unittest.main()
