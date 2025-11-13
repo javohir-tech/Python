@@ -28,7 +28,7 @@
 # try :
 #     res = arr[4]
 #     print(res)
-# except:
+# except IndexError:
 #     print(f"bizda faqat {len(arr)} ta meva bor")
 
 # ^^^^^^^^^^^^^^^^^ KeyError ^^^^^^^^^^^^^^^^
@@ -42,16 +42,27 @@
 # try:
 #     res = user[key]
 #     print(res)
-# except:
+# except KeyError:
 #     print(f" foydalanuvchini {key} malumoti kiritilmagan");
-import json
-filename = '../Data/beor.json'
-try :
-    with open(filename) as file :
-        res = json.load(file)
-        print(res['ism'])
-except:
-    print(f"{filename} fayli topilmadi ")
+# import json
 
-    
+# files = ['talaba1.json' , 'talaba3.json', 'talaba2.json']
+
+# for file in files :
+#     try:
+#         with open(f"../Data/{file}") as f :
+#             res = json.load(f)
+#     except FileNotFoundError:
+#         pass
+#     else:
+#         print(res['name'])
+        
+n = input('Son kiriitng')
+
+try :
+    print(20/int(n))
+except ValueError :
+    print("Butun son kiriting >>>")
+except ZeroDivisionError:
+    print(') ga bolish mumkin emas ')
     
