@@ -32,16 +32,26 @@
 #     print(f"bizda faqat {len(arr)} ta meva bor")
 
 # ^^^^^^^^^^^^^^^^^ KeyError ^^^^^^^^^^^^^^^^
-user = {
-    "name": "Javohir Suvonov",
-    "tel": "+998771232904",
-    "email" : "suvonovjavohir625@gmail.com"
-}
+# user = {
+#     "name": "Javohir Suvonov",
+#     "tel": "+998771232904",
+#     "email" : "suvonovjavohir625@gmail.com"
+# }
 
-key = "email"
-try:
-    res = user[key]
-    print(res)
+# key = "email"
+# try:
+#     res = user[key]
+#     print(res)
+# except:
+#     print(f" foydalanuvchini {key} malumoti kiritilmagan");
+import json
+filename = '../Data/beor.json'
+try :
+    with open(filename) as file :
+        res = json.load(file)
+        print(res['ism'])
 except:
-    print(f" foydalanuvchini {key} malumoti kiritilmagan");
+    print(f"{filename} fayli topilmadi ")
+
+    
     
