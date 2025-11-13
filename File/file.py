@@ -14,7 +14,7 @@
 # print(type(pi))
 # print(pi)
 
-# filename = 'Data/talabalar.txt'
+# filename = '../Data/talabalar.txt'
 # with open(filename) as file :
 #     for line in file:
 #         print(line)
@@ -23,3 +23,4 @@
 #     talabalar = [talaba.rstrip() for talaba in file.readlines()]
     
 # print(talabalar)
+
