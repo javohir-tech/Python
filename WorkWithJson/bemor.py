@@ -29,6 +29,8 @@ print(type(bemor))
 print(bemor__json)
 bemor2 =json.loads(bemor__json)
 print(bemor2)
+print(type(bemor__json))
+print(type(bemor2))
 
 
 
