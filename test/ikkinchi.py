@@ -1,0 +1,3 @@
+import birinchi
+
+birinchi.hello()
