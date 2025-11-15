@@ -28,15 +28,15 @@ from words import sozlar
 # email = re.findall(emailAndoza , matn)
 # print(email[0])
 
-passwordAndoza = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-_]).{8,}$"
-msg = "Parol kiriting ."
-msg += "(kamida 8 ta belgidan iborat , kamida bitta lotin bosh harf , 1 ta kichik harf)"
-msg += '1ta son va 1 ta mahsus belgidan iborat bolishi kerak '
+# passwordAndoza = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-_]).{8,}$"
+# msg = "Parol kiriting ."
+# msg += "(kamida 8 ta belgidan iborat , kamida bitta lotin bosh harf , 1 ta kichik harf)"
+# msg += '1ta son va 1 ta mahsus belgidan iborat bolishi kerak '
 
-while True :
-    passWord = input(msg)   
-    if re.match(passwordAndoza , passWord):
-        print('Qabul qilindi !!!')
-        break
-    else:
-        print('!!!maxfiy soz qabul qilinmadi!!!')
+# while True :
+#     passWord = input(msg)   
+#     if re.match(passwordAndoza , passWord):
+#         print('Qabul qilindi !!!')
+#         break
+#     else:
+#         print('!!!maxfiy soz qabul qilinmadi!!!')
