@@ -10,6 +10,7 @@ class Person:
     def __init__(self, name, surname, age, year, month, day, email=None):
         self.name = name
         self.surname = surname
+        
         self.age = age
         self.email = email
         self.year = year
