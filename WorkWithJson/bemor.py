@@ -1,14 +1,14 @@
 import json
 
-# sonlar = (1, 2, 3, 4);
-# print(type(sonlar))
-# sonalar2 = json.dumps(sonlar)
-# print(type(sonalar2))
-# print(sonalar2)
+sonlar = (1, 2, 3, 4);
+print(type(sonlar))
+sonalar2 = json.dumps(sonlar)
+print(type(sonalar2))
+print(sonalar2)
 
-# blump = True
-# b = json.dumps(blump)
-# print(b)
+blump = True
+b = json.dumps(blump)
+print(b)
 
 bemor = {
     "ism": "Alijon Valiyev",
@@ -34,7 +34,7 @@ print(type(bemor2))
 
 
 
-# with open('../Data/bemor.json', 'w') as file :
-#     json.dump(bemor, file)
+with open('../Data/bemor.json', 'w') as file :
+    json.dump(bemor, file)
 
 
